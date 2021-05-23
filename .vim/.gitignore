@@ -1,0 +1,5 @@
+autoload/plug.vim
+backup/
+swap/
+undo/
+
