@@ -20,7 +20,7 @@ Plug 'majutsushi/tagbar'
 
 Plug 'tpope/vim-surround' "Surround plugin
 
-Plug 'kien/ctrlp.vim'
+Plug 'ctrlpvim/ctrlp.vim'
 
 Plug 'ervandew/supertab'
 
@@ -29,6 +29,8 @@ Plug 'vim-scripts/OmniCppComplete'
 Plug 'tpope/vim-ragtag'
 
 Plug 'mileszs/ack.vim'
+
+Plug 'fatih/vim-go'
 
 Plug 'vim-scripts/EnhCommentify.vim'
 

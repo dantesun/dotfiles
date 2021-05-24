@@ -131,7 +131,7 @@ if command -v dircolors >/dev/null; then
 fi
 
 export GOPATH="$HOME/go"
-export PATH="$HOME/Programs/golang/bin:$PATH"
+export PATH="$HOME/Programs/golang/bin:$GOPATH/bin:$PATH"
 
 # export TERM='xterm-256color'
 
