@@ -184,6 +184,9 @@ set stal=0
 "au BufReadPost quickfix map <buffer> <silent> zw zq:g/warning:/normal zv<CR>
 "au BufReadPost quickfix normal zq
 
+"move the quickfix window to the bottom of the window layout
+autocmd FileType qf wincmd J
+
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Editing mappings
