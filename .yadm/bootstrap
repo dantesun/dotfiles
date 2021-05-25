@@ -1,5 +1,80 @@
 #!/usr/bin/env bash
 
+GOST_BIN=/usr/local/bin/gost
+
+# A function that Download assets from github
+function list_github_releases() {
+   curl -s https://api.github.com/repos/${repo}/releases/latest | grep "browser_download_url"
+   # TODO  list_github_releases ginuerzh/gost
+   # TODO  list_github_releases dandavison/delta
+}
+
+
+function is_raspberry_pi_os_64() {
+  grep "Raspberry Pi" /proc/device-tree/model > /dev/null && [ "aarch64" = $(uname -m) ]
+}
+
+function download_gost() {
+  echo "Downloading gost to ${GOST_BIN}"
+  curl -L "https://github.com/ginuerzh/gost/releases/download/v2.11.1/gost-linux-armv8-2.11.1.gz" | gunzip -c | sudo tee  ${GOST_BIN} > /dev/null
+  sudo chmod +x ${GOST_BIN}
+}
+
+
+function download_git_delta() {
+  local pkg_tmp="$(mktemp)"
+  curl -o ${pkg_tmp} -L "https://github.com/dandavison/delta/releases/download/0.7.1/git-delta_0.7.1_arm64.deb" && sudo dpkg -i ${pkg_tmp}
+  rm -f ${pkg_tmp}
+}
+
+GOST_SERVICE=/etc/systemd/system/gost.service
+function generate_gost_service() {
+  if [ -f "${GOST_SERVICE}" ]; then
+    echo "Gost systemd service exists."
+    return 0
+  fi
+  if [ -z "${GOST_PROXY}" ]; then
+    echo "Please specify a GOST_PROXY!"
+    exit 1
+  fi
+  sudo tee ${GOST_SERVICE} >/dev/null <<EOF
+[Unit]
+Description=Gost Proxy
+After=network.target
+Wants=network.target
+
+[Service]
+Type=simple
+ExecStart=${GOST_BIN} -L "socks://0.0.0.0:1080" -L "http://0.0.0.0:8080" -F "${GOST_PROXY}"
+Restart=always
+
+[Install]
+WantedBy=multi-user.target
+EOF
+}
+
+if is_raspberry_pi_os_64; then
+  # XXX Raspberry Pi OS 64bit, maybe extends to other platform later
+  dpkg -l git-delta &> /dev/null || {
+    download_git_delta
+  }
+
+  [ -f ${GOST_BIN} ] || {
+      download_gost || {
+      echo "Failed to downnload gost!" 
+      exit 1
+    }
+  }
+  generate_gost_service && sudo systemctl start gost
+fi
+
+
+if pgrep gost >/dev/null; then
+  echo "Gost is running, set http_proxy"
+  export http_proxy="http://127.0.0.1:8080"
+  export https_proxy="http://127.0.0.1:8080"
+fi
+
 if ! [ -d "$HOME/.oh-my-zsh" ]; then
   echo "Install oh-my-zsh"
   sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --keep-zshrc --unattended || {
