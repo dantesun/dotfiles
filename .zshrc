@@ -75,7 +75,7 @@ ZSH_THEME="powerlevel10k/powerlevel10k"
 # Custom plugins may be added to $ZSH_CUSTOM/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git vi-mode z magic-enter)
+plugins=(git vi-mode z magic-enter shell-proxy)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -138,6 +138,8 @@ export PATH="$HOME/Programs/golang/bin:$GOPATH/bin:$PATH"
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+
+export DEFAULT_PROXY="http://127.0.0.1:8080"
 
 # https://github.com/gdubw/gng
 alias gradle='gng'
