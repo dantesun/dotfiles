@@ -130,8 +130,14 @@ if command -v dircolors >/dev/null; then
   alias ls='ls --color=auto'
 fi
 
-export GOPATH="$HOME/go"
-export PATH="$HOME/Programs/golang/bin:$GOPATH/bin:$PATH"
+GOPATH="$HOME/go"
+GOBIN="${GOPATH}/bin"
+if command -v cygpath >/dev/null; then
+  GOPATH=$(cygpath -m ${GOPATH})
+  GOBIN=$(cygpath -m ${GOBIN})
+fi
+export GOPATH GOBIN
+export PATH="$HOME/Programs/golang/bin:$GOBIN:$PATH"
 
 # export TERM='xterm-256color'
 
