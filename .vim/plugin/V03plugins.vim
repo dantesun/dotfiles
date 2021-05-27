@@ -80,6 +80,19 @@ let g:tagbar_type_go = {
 	\ 'ctagsargs' : '-sort -silent'
 \ }
 
+""""""""""""""""""""""""""""""""""""""""""""
+" vim-go
+""""""""""""""""""""""""""""""""""""""""""""
+let g:go_fmt_command = 'goimports'
+let g:go_jump_to_error = 1
+let g:go_highlight_methods = 1
+let g:go_highlight_structs = 1
+let g:go_loaded_gosnippets = 1
+let g:go_highlight_functions = 1
+let g:go_highlight_operators = 1
+let g:go_highlight_build_constraints = 1
+let g:go_loaded_install = 1
+let g:go_def_mode='godef'
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => ctags http://vim.wikia.com/wiki/C%2B%2B_code_completion
