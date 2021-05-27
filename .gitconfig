@@ -25,10 +25,8 @@
 [user]
 	name = Dante Sun
 	email = dante.sun@gmail.com
-[includeIf "gitdir:/Volumes/Work/workspace/work/"]
-  path = ~/.git-ali-user
-[includeIf "gitdir:~/workspace/work/"]
-  path = ~/.git-ali-user
+[includeIf "gitdir:work/"]
+  path = ~/.git-user
 [core]
 	autocrlf = false
 	excludesfile = ~/.gitignore

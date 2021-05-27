@@ -208,7 +208,7 @@ vmap <A-k> :m'<-2<cr>`>my`<mzgv`yo`z
 vnoremap < <gv
 vnoremap > >gv
 " run shell
-set shell=bash\ --login
+"set shell=bash\ --login
 nnoremap <silent> <S-F9> :shell<CR>
 nnoremap <silent> <F3> :set hlsearch!<CR>
 
@@ -272,10 +272,6 @@ command W :execute ':silent w !sudo tee % > /dev/null' | :edit!
 
 let g:agprg="/home/dsun/tools/bin/ag"
 
-
-if executable("zsh")
-  set shell=zsh\ -l
-endif
 
 let s:private_vimrc=expand("~/.private-vimrc")
 if filereadable(s:private_vimrc)
