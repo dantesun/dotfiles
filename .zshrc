@@ -139,7 +139,7 @@ if command -v go >/dev/null; then
     #Cygwin need the unix path
     PATH="$(cygpath -u ${GOBIN}):$PATH"
   else
-    PATH="{GOBIN}:$PATH"
+    PATH="${GOBIN}:$PATH"
   fi
   export GOPATH GOBIN
 fi
