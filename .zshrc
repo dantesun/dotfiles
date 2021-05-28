@@ -129,18 +129,20 @@ if command -v dircolors >/dev/null; then
   alias ls='ls --color=auto'
 fi
 
-GOPATH="$HOME/go"
-GOBIN="${GOPATH}/bin"
-if command -v cygpath >/dev/null; then
-  #Under cygwin, golang don't recognize unix path style
-  GOPATH=$(cygpath -m ${GOPATH})
-  GOBIN=$(cygpath -m ${GOBIN})
-  #Cygwin need the unix path
-  PATH="$(cygpath -u ${GOBIN}):$PATH"
-else
-  PATH="{GOBIN}:$PATH"
+if command -v go >/dev/null; then
+  GOPATH="$HOME/go"
+  GOBIN="${GOPATH}/bin"
+  if command -v cygpath >/dev/null; then
+    #Under cygwin, golang don't recognize unix path style
+    GOPATH=$(cygpath -m ${GOPATH})
+    GOBIN=$(cygpath -m ${GOBIN})
+    #Cygwin need the unix path
+    PATH="$(cygpath -u ${GOBIN}):$PATH"
+  else
+    PATH="{GOBIN}:$PATH"
+  fi
+  export GOPATH GOBIN
 fi
-export GOPATH GOBIN
 
 # export TERM='xterm-256color'
 
@@ -148,8 +150,7 @@ export GOPATH GOBIN
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
-export DEFAULT_HTTP_PROXY="127.0.0.1:8080"
-export DEFAULT_SOCKS_PROXY="127.0.0.1:8010"
+export DEFAULT_PROXY="127.0.0.1:8080"
 
 # https://github.com/gdubw/gng
 alias gradle='gng'
