@@ -104,6 +104,11 @@ source $ZSH/oh-my-zsh.sh
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
+#Manually installed executables go into here
+if [ -d "$HOME/Programs/bin" ]; then
+  export PATH="$HOME/Programs/bin:$PATH"
+fi
+
 if command -v brew >/dev/null; then
   #brew install homeshick
   export HOMESHICK_DIR=/usr/local/opt/homeshick
@@ -143,6 +148,7 @@ if command -v go >/dev/null; then
   fi
   export GOPATH GOBIN
 fi
+
 
 # export TERM='xterm-256color'
 

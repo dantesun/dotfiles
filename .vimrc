@@ -14,7 +14,11 @@ call plug#begin('~/Programs/vim-plugins')
 
 Plug 'her/central.vim' "centrolize backup/swap/undo direcotires of VIM
 
+Plug 'vim/killersheep'
+
 Plug 'scrooloose/nerdtree'
+
+Plug 'ryanoasis/vim-devicons'
 
 Plug 'majutsushi/tagbar'
 
