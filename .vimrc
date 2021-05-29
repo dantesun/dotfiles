@@ -34,7 +34,7 @@ Plug 'tpope/vim-ragtag'
 
 Plug 'mileszs/ack.vim'
 
-Plug 'fatih/vim-go'
+Plug 'fatih/vim-go', { 'tag': '*' }
 
 Plug 'vim-scripts/EnhCommentify.vim'
 
