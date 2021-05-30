@@ -161,6 +161,10 @@ export DEFAULT_PROXY="127.0.0.1:8080"
 # https://github.com/gdubw/gng
 alias gradle='gng'
 
+if command -v yadm >/dev/null; then
+  [ -d /backup/system ] || sudo mkdir -p /backup/system
+  alias sysyadm="sudo yadm -Y /backup/system"
+fi
 #Intellij Idea Terminal
 if compgen -v | grep -e "^_INTELLIJ_.*" >/dev/null && [ $SHLVL = "1" ]; then
   cd $OLDPWD
