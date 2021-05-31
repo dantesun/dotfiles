@@ -126,6 +126,10 @@ if command -v brew >/dev/null; then
   fi
 fi
 
+function is_cygwin() {
+  [[ "$(uname -s)" = CYGWIN* ]]
+}
+
 bindkey '\e.' insert-last-word
 bindkey '≥' insert-last-word
 if command -v dircolors >/dev/null; then
@@ -137,7 +141,7 @@ fi
 if command -v go >/dev/null; then
   GOPATH="$HOME/go"
   GOBIN="${GOPATH}/bin"
-  if command -v cygpath >/dev/null; then
+  if is_cygwin; then
     #Under cygwin, golang don't recognize unix path style
     GOPATH=$(cygpath -m ${GOPATH})
     GOBIN=$(cygpath -m ${GOBIN})
@@ -161,9 +165,12 @@ export DEFAULT_PROXY="127.0.0.1:8080"
 # https://github.com/gdubw/gng
 alias gradle='gng'
 
-if command -v yadm >/dev/null; then
-  [ -d /backup/system ] || sudo mkdir -p /backup/system
-  alias sysyadm="sudo yadm -Y /backup/system"
+if ! is_cygwin; then
+  #use yadm to backup system configuration under /etc
+  if command -v yadm >/dev/null; then
+    [ -d /backup/system ] || sudo mkdir -p /backup/system
+    alias sysyadm="sudo yadm -Y /backup/system"
+  fi
 fi
 #Intellij Idea Terminal
 if compgen -v | grep -e "^_INTELLIJ_.*" >/dev/null && [ $SHLVL = "1" ]; then
