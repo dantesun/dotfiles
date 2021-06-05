@@ -19,7 +19,7 @@ def make_proxies(url: str):
 
 
 def merge(mapping: dict):
-    return ("%s=%s" % _ for _ in mapping.items())
+    return ("%s=http://%s" % _ for _ in mapping.items())
 
 
 class CommandSet:
