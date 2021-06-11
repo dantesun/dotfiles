@@ -16,9 +16,22 @@ Plug 'her/central.vim' "centrolize backup/swap/undo direcotires of VIM
 
 Plug 'vim/killersheep'
 
-Plug 'scrooloose/nerdtree'
+Plug 'scrooloose/nerdtree', { 'tag': '*' }
 
-Plug 'ryanoasis/vim-devicons'
+Plug 'ryanoasis/vim-devicons', { 'tag': '*' }
+
+"Plug 'lambdalisue/nerdfont.vim'
+
+"Plug 'mcchrish/nnn.vim'
+
+"Plug 'voldikss/vim-floaterm'
+
+" tabular plugin is used to format tables
+Plug 'godlygeek/tabular'
+" JSON front matter highlight plugin
+Plug 'elzr/vim-json'
+Plug 'plasticboy/vim-markdown'
+Plug 'pedrohdz/vim-yaml-folds'
 
 Plug 'majutsushi/tagbar'
 

@@ -187,6 +187,12 @@ set stal=0
 "move the quickfix window to the bottom of the window layout
 autocmd FileType qf wincmd J
 
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => folding configuration
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+set nofoldenable
+set foldlevel=1
+set foldcolumn=1
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Editing mappings
@@ -268,9 +274,6 @@ set cscopequickfix=s-,c-,d-,i-,t-,e-
 
 "Save the file using sudo
 command W :execute ':silent w !sudo tee % > /dev/null' | :edit!
-
-
-let g:agprg="/home/dsun/tools/bin/ag"
 
 
 let s:private_vimrc=expand("~/.private-vimrc")

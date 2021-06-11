@@ -12,36 +12,37 @@ let g:SuperTabDefaultCompletionType = "context"
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => NERDTree
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-nmap <silent> <Leader>P :NERDTreeToggle<CR>
-nmap <silent> <Leader>f :NERDTreeFind<CR>
-nmap <silent> <leader>F :NERDTreeFind<CR>
-let NERDTreeShowBookmarks = 1
-"let NERDTreeWinSize = 40
-"autocmd vimenter * NERDTree
-autocmd vimenter * if !argc() |  NERDTree | endif
-let NERDTreeChDirMode = 2
-let NERDTreeWinPos="right"
+  nmap <silent> <Leader>P :NERDTreeToggle<CR>
+  nmap <silent> <Leader>f :NERDTreeFind<CR>
+  nmap <silent> <leader>F :NERDTreeFind<CR>
+  let NERDTreeShowBookmarks = 1
+  "let NERDTreeWinSize = 40
+  "autocmd vimenter * NERDTree
+  autocmd vimenter * if !argc() |  NERDTree | endif
+  let NERDTreeChDirMode = 2
+  let NERDTreeWinPos="right"
 
-" Prevent :bd inside NERDTree buffer
-au FileType nerdtree cnoreabbrev <buffer> bd <nop>
-au FileType nerdtree cnoreabbrev <buffer> BD <nop>
+  " Prevent :bd inside NERDTree buffer
+  au FileType nerdtree cnoreabbrev <buffer> bd <nop>
+  au FileType nerdtree cnoreabbrev <buffer> BD <nop>
 
-autocmd WinEnter * call s:CloseIfOnlyNerdTreeLeft()
+  autocmd WinEnter * call s:CloseIfOnlyNerdTreeLeft()
 
-" Close all open buffers on entering a window if the only
-" buffer that's left is the NERDTree buffer
-function! s:CloseIfOnlyNerdTreeLeft()
-  if exists("t:NERDTreeBufName")
-    if bufwinnr(t:NERDTreeBufName) != -1
-      if winnr("$") == 1
-        q
+  " Close all open buffers on entering a window if the only
+  " buffer that's left is the NERDTree buffer
+  function! s:CloseIfOnlyNerdTreeLeft()
+    if exists("t:NERDTreeBufName")
+      if bufwinnr(t:NERDTreeBufName) != -1
+        if winnr("$") == 1
+          q
+        endif
       endif
     endif
-  endif
-endfunction
+  endfunction
 
-" Always show status line. Fix the problem AirLine dispappears when NerdTree is toggle off
-set laststatus=2
+  " Always show status line. Fix the problem AirLine dispappears when NerdTree is toggle off
+  set laststatus=2
+
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => tagbar
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""

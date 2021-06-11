@@ -75,7 +75,7 @@ ZSH_THEME="powerlevel10k/powerlevel10k"
 # Custom plugins may be added to $ZSH_CUSTOM/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git vi-mode z magic-enter proxy)
+plugins=(git vi-mode z magic-enter proxy kubectl docker)
 source $ZSH/oh-my-zsh.sh
 
 # User configuration
@@ -105,9 +105,7 @@ source $ZSH/oh-my-zsh.sh
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
 #Manually installed executables go into here
-if [ -d "$HOME/Programs/bin" ]; then
-  export PATH="$HOME/Programs/bin:$PATH"
-fi
+export PATH="$HOME/Programs/bin:$PATH"
 
 if command -v brew >/dev/null; then
   #brew install homeshick
@@ -176,3 +174,16 @@ fi
 if compgen -v | grep -e "^_INTELLIJ_.*" >/dev/null && [ $SHLVL = "1" ]; then
   cd $OLDPWD
 fi
+
+if grep microsoft /proc/sys/kernel/osrelease &> /dev/null; then
+  #In WSL, Ingnore the kubectl provided by Docker Desktop
+  alias kubectl='/usr/bin/kubectl'
+fi
+if command -v vim >/dev/null; then
+  export EDITOR=vim
+fi
+
+if command -v broot >/dev/null; then
+  [ -d $HOME/.config/broot ] && source $HOME/.config/broot/launcher/bash/br
+fi
+[ -d $HOME/.cargo/env ] && source $HOME/.cargo/env
