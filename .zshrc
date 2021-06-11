@@ -127,16 +127,29 @@ fi
 function is_cygwin() {
   [[ "$(uname -s)" = CYGWIN* ]]
 }
+function has_cmd() {
+  command -v $1 >/dev/null
+}
+function is_raspberry_pi_os_64() {
+  grep "Raspberry Pi" /proc/device-tree/model &> /dev/null && [ "aarch64" = $(uname -m) ]
+}
+function is_wsl() {
+  grep microsoft /proc/sys/kernel/osrelease &> /dev/null
+}
+function is_intellij_terminal() {
+  compgen -v | grep -e "^_INTELLIJ_.*" >/dev/null && [ $SHLVL = "1" ]
+}
 
 bindkey '\e.' insert-last-word
 bindkey '≥' insert-last-word
-if command -v dircolors >/dev/null; then
+
+if has_cmd dircolors; then
   eval $(dircolors ~/.dircolors.256dark)
   zstyle ':completion:*:default' list-colors ${(s.:.)LS_COLORS}
   alias ls='ls --color=auto'
 fi
 
-if command -v go >/dev/null; then
+if has_cmd go; then
   GOPATH="$HOME/go"
   GOBIN="${GOPATH}/bin"
   if is_cygwin; then
@@ -165,25 +178,26 @@ alias gradle='gng'
 
 if ! is_cygwin; then
   #use yadm to backup system configuration under /etc
-  if command -v yadm >/dev/null; then
+  if has_cmd yadm; then
     [ -d /backup/system ] || sudo mkdir -p /backup/system
     alias sysyadm="sudo yadm -Y /backup/system"
   fi
 fi
+
 #Intellij Idea Terminal
-if compgen -v | grep -e "^_INTELLIJ_.*" >/dev/null && [ $SHLVL = "1" ]; then
+if is_intellij_terminal; then
   cd $OLDPWD
 fi
 
-if grep microsoft /proc/sys/kernel/osrelease &> /dev/null; then
+if is_wsl; then
   #In WSL, Ingnore the kubectl provided by Docker Desktop
   alias kubectl='/usr/bin/kubectl'
 fi
-if command -v vim >/dev/null; then
+if has_cmd vim; then
   export EDITOR=vim
 fi
 
-if command -v broot >/dev/null; then
+if has_cmd broot; then
   [ -d $HOME/.config/broot ] && source $HOME/.config/broot/launcher/bash/br
 fi
 [ -d $HOME/.cargo/env ] && source $HOME/.cargo/env
