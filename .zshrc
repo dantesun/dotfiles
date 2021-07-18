@@ -107,7 +107,17 @@ source $ZSH/oh-my-zsh.sh
 #Manually installed executables go into here
 export PATH="$HOME/Programs/bin:$PATH"
 
-if command -v brew >/dev/null; then
+function is_cygwin() {
+  [[ "$(uname -s)" = CYGWIN* ]]
+}
+function is_mac() {
+  [[ "$(uname -s)" = Darwin ]]
+}
+function has_cmd() {
+  command -v $1 >/dev/null
+}
+
+if is_mac && has_cmd brew >/dev/null; then
   #brew install homeshick
   export HOMESHICK_DIR=/usr/local/opt/homeshick
   source "/usr/local/opt/homeshick/homeshick.sh"
@@ -124,12 +134,6 @@ if command -v brew >/dev/null; then
   fi
 fi
 
-function is_cygwin() {
-  [[ "$(uname -s)" = CYGWIN* ]]
-}
-function has_cmd() {
-  command -v $1 >/dev/null
-}
 function is_raspberry_pi_os_64() {
   grep "Raspberry Pi" /proc/device-tree/model &> /dev/null && [ "aarch64" = $(uname -m) ]
 }
@@ -172,6 +176,12 @@ fi
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
 export DEFAULT_PROXY="127.0.0.1:8080"
+if is_wsl; then
+  # WSL Interface on Windows Host
+  WINHOST=$(grep nameserver /etc/resolv.conf | awk '{print $2}')
+  export DEFAULT_PROXY="$WINHOST:3128"
+fi
+
 
 # https://github.com/gdubw/gng
 alias gradle='gng'
@@ -201,3 +211,8 @@ if has_cmd broot; then
   [ -d $HOME/.config/broot ] && source $HOME/.config/broot/launcher/bash/br
 fi
 [ -d $HOME/.cargo/env ] && source $HOME/.cargo/env
+
+LINUX_BREW="/home/linuxbrew/.linuxbrew/bin/brew"
+if [ -x ${LINUX_BREW} ]; then
+  eval "$($LINUX_BREW shellenv)"
+fi

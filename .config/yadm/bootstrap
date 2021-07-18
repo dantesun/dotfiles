@@ -46,7 +46,7 @@ function list_github_releases() {
 
 
 function is_raspberry_pi_os_64() {
-  grep "Raspberry Pi" /proc/device-tree/model > /dev/null && [ "aarch64" = $(uname -m) ]
+  grep "Raspberry Pi" /proc/device-tree/model &> /dev/null && [ "aarch64" = $(uname -m) ]
 }
 
 function download_gost() {
