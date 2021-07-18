@@ -35,7 +35,15 @@ function config_vim() {
 
   make && sudo make install
 }
-GOST_BIN=/usr/local/bin/gost
+
+function is_docker_nexus3() {
+  docker ps -f "ancestor=sonatype/nexus3:atest" --format "{{.ID}}: {{.Command}} {{.Image}}"  | grep sonatype/nexus3:atest > /dev/null
+}
+
+function install_nexus() {
+  docker create volume nexus-data
+  docker run -d -p 8081:8081 --restart always --name nexus -v nexus-data:/nexus-data sonatype/nexus3
+}
 
 # A function that Download assets from github
 function list_github_releases() {
@@ -48,6 +56,8 @@ function list_github_releases() {
 function is_raspberry_pi_os_64() {
   grep "Raspberry Pi" /proc/device-tree/model &> /dev/null && [ "aarch64" = $(uname -m) ]
 }
+
+GOST_BIN=/usr/local/bin/gost
 
 function download_gost() {
   echo "Downloading gost to ${GOST_BIN}"
@@ -104,11 +114,6 @@ if is_raspberry_pi_os_64; then
 fi
 
 
-if pgrep gost >/dev/null; then
-  echo "Gost is running, set http_proxy"
-  export http_proxy="http://127.0.0.1:8080"
-  export https_proxy="http://127.0.0.1:8080"
-fi
 
 if ! [ -d "$HOME/.oh-my-zsh" ]; then
   echo "Install oh-my-zsh"
