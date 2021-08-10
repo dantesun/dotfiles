@@ -126,3 +126,8 @@ if ! [ -d "$HOME/.oh-my-zsh" ]; then
     exit 1
   }
 fi
+
+function install_go_proxy() {
+  go env -w GOPROXY="http://${WSL_HOST}:8081/repository/go/"
+  go env -w GOSUMDB="sum.golang.org http://${WSL_HOST}:8081/repository/gosum/"
+}

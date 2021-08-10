@@ -181,6 +181,7 @@ if is_wsl; then
   WINHOST=$(grep nameserver /etc/resolv.conf | awk '{print $2}')
   export DEFAULT_PROXY="$WINHOST:3128"
 fi
+export MAVEN_OPTS="-Duser.language=en -Duser.home=$(cygpath -w $HOME)"
 
 
 # https://github.com/gdubw/gng
@@ -203,6 +204,15 @@ if is_wsl; then
   #In WSL, Ingnore the kubectl provided by Docker Desktop
   alias kubectl='/usr/bin/kubectl'
 fi
+
+if has_cmd wsl && is_cygwin; then
+  # Extract the IP Address of WSL Distribution
+  WSL_HOST=$(wsl -- ip addr|awk '/eth0/ && /inet/ {gsub(/\/[0-9][0-9]/,""); print $2}')
+  go env -w GOPROXY="http://${WSL_HOST}:8081/repository/go/"
+  go env -w GOSUMDB="sum.golang.org http://${WSL_HOST}:8081/repository/gosum/"
+
+fi
+
 if has_cmd vim; then
   export EDITOR=vim
 fi
