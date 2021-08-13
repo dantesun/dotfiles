@@ -208,8 +208,8 @@ fi
 if has_cmd wsl && is_cygwin; then
   # Extract the IP Address of WSL Distribution
   WSL_HOST=$(wsl -- ip addr|awk '/eth0/ && /inet/ {gsub(/\/[0-9][0-9]/,""); print $2}')
-  go env -w GOPROXY="http://${WSL_HOST}:8081/repository/go/"
-  go env -w GOSUMDB="sum.golang.org http://${WSL_HOST}:8081/repository/gosum/"
+#   go env -w GOPROXY="http://${WSL_HOST}:8081/repository/go/"
+#   go env -w GOSUMDB="sum.golang.org http://${WSL_HOST}:8081/repository/gosum/"
 
 fi
 
