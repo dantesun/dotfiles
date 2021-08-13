@@ -16,6 +16,9 @@ set NERDTree
 " Copy to system clipboard as well
 set clipboard+=unnamed
 
+set visualbell
+set noerrorbells
+
 let mapleader = ","
 
 " Closing tabs
@@ -23,7 +26,7 @@ nmap <leader>q :action CloseContent<cr>
 nmap <leader>Q :action ReopenClosedTab<cr>
 
 " Navigation
-nmap <leader>f :ToggleNERDTree<cr>
+nmap <leader>f :NERDTreeFocus<cr>
 
 nmap <leader>h :action Back<cr>
 nmap <leader>l :action Forward<cr>
@@ -31,7 +34,6 @@ nmap <leader>L :action RecentLocations<cr>
 nmap <leader>g :action GotoDeclaration<cr>
 nmap <leader>u :action FindUsages<cr>
 nmap <leader>c :action GotoClass<cr>
-nmap <leader>s :action GotoSymbol<cr>
 nmap <leader>; :action FileStructurePopup<cr>
 nmap <leader>M :action ActivateStructureToolWindow<cr>
 nmap <leader>d :action ShowErrorDescription<cr>
@@ -41,6 +43,9 @@ nmap <leader>e :action RecentFiles<cr>
 nmap <leader>t :action GotoTest<cr>
 nmap <leader>p :action JumpToLastWindow<cr>
 nmap <leader>b :action ShowBookmarks<cr>
+
+nmap <leader>s :action SurroundWith<cr>
+nmap <leader>m :action CodeFormatGroup<cr>
 
 " nmap <leader>a :action Switcher<cr>
 nmap <leader>a :action RecentChangedFiles<cr>
