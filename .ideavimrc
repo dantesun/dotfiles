@@ -43,6 +43,8 @@ nmap <leader>e :action RecentFiles<cr>
 nmap <leader>t :action GotoTest<cr>
 nmap <leader>p :action JumpToLastWindow<cr>
 nmap <leader>b :action ShowBookmarks<cr>
+nmap <leader>F :action FindInPath<cr>
+nmap <leader>j :action QuickJavaDoc<cr>
 
 nmap <leader>s :action SurroundWith<cr>
 nmap <leader>m :action CodeFormatGroup<cr>
