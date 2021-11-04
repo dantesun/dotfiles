@@ -179,7 +179,7 @@ export DEFAULT_PROXY="127.0.0.1:8080"
 if is_wsl; then
   # WSL Interface on Windows Host
   WINHOST=$(grep nameserver /etc/resolv.conf | awk '{print $2}')
-  export DEFAULT_PROXY="$WINHOST:3128"
+  export DEFAULT_PROXY="$WINHOST:8080"
 fi
 export MAVEN_OPTS="-Duser.language=en -Duser.home=$(cygpath -w $HOME)"
 
