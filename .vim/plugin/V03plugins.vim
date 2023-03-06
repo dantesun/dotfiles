@@ -145,8 +145,9 @@ nnoremap <C-\>d :cs find d <C-R>=expand("<cword>")<CR><CR>
 " => ack.vim
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "ag is faster than ack
-let g:ackprg = 'ag --nogroup --nocolor --column --ignore cscope.out --ignore tags --ignore "*.java" --ignore "*.d"'
+"let g:ackprg = 'ag --nogroup --nocolor --column --ignore cscope.out --ignore tags --ignore "*.java" --ignore "*.d"'
 
+let g:ackprg = 'rg --vimgrep --type-not sql --smart-case'
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => CtrlP

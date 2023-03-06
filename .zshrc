@@ -1,12 +1,5 @@
-# Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
-# Initialization code that may require console input (password prompts, [y/n]
-# confirmations, etc.) must go above this block; everything else may go below.
-if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
-  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
-fi
-
 # If you come from bash you might have to change your $PATH.
-# export PATH=$HOME/bin:/usr/local/bin:$PATH
+export PATH=$HOME/bin:/usr/local/bin:$PATH
 
 # Path to your oh-my-zsh installation.
 export ZSH="$HOME/.oh-my-zsh"
@@ -15,7 +8,11 @@ export ZSH="$HOME/.oh-my-zsh"
 # load a random theme each time oh-my-zsh is loaded, in which case,
 # to know which specific one was loaded, run: echo $RANDOM_THEME
 # See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
-ZSH_THEME="powerlevel10k/powerlevel10k"
+# ZSH_THEME="robbyrussell"
+
+# skip the verification of insecure directories you can set the variable ZSH_DISABLE_COMPFIX to
+# "true" before oh-my-zsh is sourced in your zshrc file.
+ZSH_DISABLE_COMPFIX="true"
 
 # Set list of themes to pick from when loading at random
 # Setting this variable when ZSH_THEME=random will cause zsh to load
@@ -30,14 +27,13 @@ ZSH_THEME="powerlevel10k/powerlevel10k"
 # Case-sensitive completion must be off. _ and - will be interchangeable.
 # HYPHEN_INSENSITIVE="true"
 
-# Uncomment the following line to disable bi-weekly auto-update checks.
-# DISABLE_AUTO_UPDATE="true"
-
-# Uncomment the following line to automatically update without prompting.
-# DISABLE_UPDATE_PROMPT="true"
+# Uncomment one of the following lines to change the auto-update behavior
+# zstyle ':omz:update' mode disabled  # disable automatic updates
+# zstyle ':omz:update' mode auto      # update automatically without asking
+zstyle ':omz:update' mode reminder  # just remind me to update when it's time
 
 # Uncomment the following line to change how often to auto-update (in days).
-# export UPDATE_ZSH_DAYS=13
+# zstyle ':omz:update' frequency 13
 
 # Uncomment the following line if pasting URLs and other text is messed up.
 # DISABLE_MAGIC_FUNCTIONS="true"
@@ -52,6 +48,9 @@ ZSH_THEME="powerlevel10k/powerlevel10k"
 # ENABLE_CORRECTION="true"
 
 # Uncomment the following line to display red dots whilst waiting for completion.
+# You can also set it to another string to have that shown instead of the default red dots.
+# e.g. COMPLETION_WAITING_DOTS="%F{yellow}waiting...%f"
+# Caution: this setting can cause issues with multiline prompts in zsh < 5.7.1 (see #5765)
 # COMPLETION_WAITING_DOTS="true"
 
 # Uncomment the following line if you want to disable marking untracked files
@@ -75,15 +74,16 @@ ZSH_THEME="powerlevel10k/powerlevel10k"
 # Custom plugins may be added to $ZSH_CUSTOM/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git vi-mode z magic-enter proxy kubectl docker)
+plugins=(git vi-mode proxy z dotenv)
+
 source $ZSH/oh-my-zsh.sh
 
 # User configuration
 
-# export MANPATH="/usr/local/man:$MANPATH"
+export MANPATH="/usr/local/man:$MANPATH"
 
 # You may need to manually set your language environment
-# export LANG=en_US.UTF-8
+export LANG=en_US.UTF-8
 
 # Preferred editor for local and remote sessions
 # if [[ -n $SSH_CONNECTION ]]; then
@@ -103,126 +103,3 @@ source $ZSH/oh-my-zsh.sh
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
-
-#Manually installed executables go into here
-export PATH="$HOME/Programs/bin:$PATH"
-
-function is_cygwin() {
-  [[ "$(uname -s)" = CYGWIN* ]]
-}
-function is_mac() {
-  [[ "$(uname -s)" = Darwin ]]
-}
-function has_cmd() {
-  command -v $1 >/dev/null
-}
-
-if is_mac && has_cmd brew >/dev/null; then
-  #brew install homeshick
-  export HOMESHICK_DIR=/usr/local/opt/homeshick
-  source "/usr/local/opt/homeshick/homeshick.sh"
-
-  #brew install coreutils
-  export PATH="/usr/local/opt/coreutils/libexec/gnubin:$PATH"
-  # brew tap domt4/autoupdate
-  export HOMEBREW_AUTO_UPDATE_SECS="86400"
-
-  # brew install git-extras
-  source "/usr/local/opt/git-extras/share/git-extras/git-extras-completion.zsh"
-  if command -v gtar>/dev/null; then
-    export PATH="/usr/local/opt/gnu-tar/libexec/gnubin:$PATH"
-  fi
-fi
-
-function is_raspberry_pi_os_64() {
-  grep "Raspberry Pi" /proc/device-tree/model &> /dev/null && [ "aarch64" = $(uname -m) ]
-}
-function is_wsl() {
-  grep microsoft /proc/sys/kernel/osrelease &> /dev/null
-}
-function is_intellij_terminal() {
-  compgen -v | grep -e "^_INTELLIJ_.*" >/dev/null && [ $SHLVL = "1" ]
-}
-
-bindkey '\e.' insert-last-word
-bindkey '≥' insert-last-word
-
-if has_cmd dircolors; then
-  eval $(dircolors ~/.dircolors.256dark)
-  zstyle ':completion:*:default' list-colors ${(s.:.)LS_COLORS}
-  alias ls='ls --color=auto'
-fi
-
-if has_cmd go; then
-  GOPATH="$HOME/go"
-  GOBIN="${GOPATH}/bin"
-  if is_cygwin; then
-    #Under cygwin, golang don't recognize unix path style
-    GOPATH=$(cygpath -m ${GOPATH})
-    GOBIN=$(cygpath -m ${GOBIN})
-    #Cygwin need the unix path
-    PATH="$(cygpath -u ${GOBIN}):$PATH"
-  else
-    PATH="${GOBIN}:$PATH"
-  fi
-  export GOPATH GOBIN
-fi
-
-
-# export TERM='xterm-256color'
-
-
-# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
-[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
-
-export DEFAULT_PROXY="127.0.0.1:8080"
-if is_wsl; then
-  # WSL Interface on Windows Host
-  WINHOST=$(grep nameserver /etc/resolv.conf | awk '{print $2}')
-  export DEFAULT_PROXY="$WINHOST:8080"
-fi
-export MAVEN_OPTS="-Duser.language=en -Duser.home=$(cygpath -w $HOME)"
-
-
-# https://github.com/gdubw/gng
-alias gradle='gng'
-
-if ! is_cygwin; then
-  #use yadm to backup system configuration under /etc
-  if has_cmd yadm; then
-    [ -d /backup/system ] || sudo mkdir -p /backup/system
-    alias sysyadm="sudo yadm -Y /backup/system"
-  fi
-fi
-
-#Intellij Idea Terminal
-if is_intellij_terminal; then
-  cd $OLDPWD
-fi
-
-if is_wsl; then
-  #In WSL, Ingnore the kubectl provided by Docker Desktop
-  alias kubectl='/usr/bin/kubectl'
-fi
-
-if has_cmd wsl && is_cygwin; then
-  # Extract the IP Address of WSL Distribution
-  WSL_HOST=$(wsl -- ip addr|awk '/eth0/ && /inet/ {gsub(/\/[0-9][0-9]/,""); print $2}')
-#   go env -w GOPROXY="http://${WSL_HOST}:8081/repository/go/"
-#   go env -w GOSUMDB="sum.golang.org http://${WSL_HOST}:8081/repository/gosum/"
-
-fi
-
-if has_cmd vim; then
-  export EDITOR=vim
-fi
-
-if has_cmd broot; then
-  [ -d $HOME/.config/broot ] && source $HOME/.config/broot/launcher/bash/br
-fi
-[ -d $HOME/.cargo/env ] && source $HOME/.cargo/env
-
-LINUX_BREW="/home/linuxbrew/.linuxbrew/bin/brew"
-if [ -x ${LINUX_BREW} ]; then
-  eval "$($LINUX_BREW shellenv)"
-fi

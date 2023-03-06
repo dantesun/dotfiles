@@ -63,6 +63,8 @@ Plug 'bling/vim-airline' "VIM status line
 
 Plug 'tpope/vim-fugitive' "Git integration
 
+"Plug 'neoclide/coc.nvim', {'branch': 'release'}
+
 
 call plug#end()
 
