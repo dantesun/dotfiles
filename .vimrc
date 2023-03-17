@@ -10,7 +10,7 @@ if empty(glob(data_dir . '/autoload/plug.vim'))
 endif
 
 
-call plug#begin('~/Programs/vim-plugins')
+call plug#begin('~/.vim-plug/plugins')
 
 Plug 'her/central.vim' "centrolize backup/swap/undo direcotires of VIM
 
