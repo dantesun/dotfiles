@@ -92,3 +92,4 @@ export NNN_PLUG='f:finder;o:fzopen;p:mocq;d:diffs;t:nmount;v:imgview'
 export NNN_FCOLORS=c1e2272e006033f7c6d6abc4
 export NNN_COLORS=1234
 export NNN_OPTS="cdEnrx"
+export PATH=$HOME/bin:$PATH
