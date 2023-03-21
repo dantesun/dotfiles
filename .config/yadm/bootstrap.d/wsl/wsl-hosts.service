@@ -1,0 +1,9 @@
+[Unit]
+Description=Fix etc/hosts
+
+[Service]
+Type=oneshot
+ExecStart=/home/dsun/.config/yadm/bootstrap.d/wsl/wsl-hosts.sh
+
+[Install]
+WantedBy=multi-user.target
