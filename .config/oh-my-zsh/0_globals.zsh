@@ -34,6 +34,7 @@ if $IS_WSL; then
   # WSL Interface on Windows Host
   WINHOST=$(grep nameserver /etc/resolv.conf | awk '{print $2}')
   export DEFAULT_PROXY="$WINHOST:8080"
+  export DISPLAY="$WINHOST:0.0"
 fi
 
 bindkey '\e.' insert-last-word
@@ -93,3 +94,4 @@ export NNN_FCOLORS=c1e2272e006033f7c6d6abc4
 export NNN_COLORS=1234
 export NNN_OPTS="cdEnrx"
 export PATH=$HOME/bin:$PATH
+export PATH="${KREW_ROOT:-$HOME/.krew}/bin:$PATH"

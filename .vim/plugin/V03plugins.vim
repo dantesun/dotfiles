@@ -206,3 +206,4 @@ let g:flake8_max_complexity=10
 "To customize the location of quick fix window, set g:flake8_quickfix_location:
 "let g:flake8_quickfix_location="topleft"
 autocmd BufWritePost *.py call Flake8()
+

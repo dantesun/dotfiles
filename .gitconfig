@@ -3,6 +3,7 @@
 	autocrlf = input
 	excludesfile = ~/.gitignore
 	fileMode = false
+	quotepath = false
 ; [delta]
 ;   features = side-by-side line-numbers decorations
 ;   syntax-theme = Dracula
@@ -32,3 +33,5 @@
 	required = true
 [credential]
 	helper = store
+[safe]
+	directory = *

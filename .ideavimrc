@@ -7,19 +7,19 @@ set incsearch
 
 " Emulated Plugins
 set surround
-
 " Multiple cursors support
 set multiple-cursors
-
 set NERDTree
+set commentary
+set highlightedyank
 
 " Copy to system clipboard as well
 set clipboard+=unnamed
 
 set visualbell
-set noerrorbells
 
 let mapleader = ","
+set easymotion
 
 " Closing tabs
 nmap <leader>q :action CloseContent<cr>
@@ -53,6 +53,7 @@ nmap <leader>m :action CodeFormatGroup<cr>
 " nmap <leader>a :action Switcher<cr>
 nmap <leader>a :action RecentChangedFiles<cr>
 
+nmap <ctr>o :action Back
 
 
 " Refactorings

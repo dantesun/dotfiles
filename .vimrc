@@ -12,6 +12,8 @@ endif
 
 call plug#begin('~/.vim-plug/plugins')
 
+Plug 'junegunn/goyo.vim'
+
 Plug 'her/central.vim' "centrolize backup/swap/undo direcotires of VIM
 
 Plug 'vim/killersheep'
@@ -29,9 +31,9 @@ Plug 'ryanoasis/vim-devicons', { 'tag': '*' }
 " tabular plugin is used to format tables
 Plug 'godlygeek/tabular'
 " JSON front matter highlight plugin
-Plug 'elzr/vim-json'
-Plug 'plasticboy/vim-markdown'
-Plug 'pedrohdz/vim-yaml-folds'
+"Plug 'elzr/vim-json'
+"Plug 'plasticboy/vim-markdown'
+"Plug 'pedrohdz/vim-yaml-folds'
 
 Plug 'majutsushi/tagbar'
 
@@ -39,9 +41,9 @@ Plug 'tpope/vim-surround' "Surround plugin
 
 Plug 'ctrlpvim/ctrlp.vim'
 
-Plug 'ervandew/supertab'
+"Plug 'ervandew/supertab'
 
-Plug 'vim-scripts/OmniCppComplete'
+"Plug 'vim-scripts/OmniCppComplete'
 
 Plug 'tpope/vim-ragtag'
 
@@ -49,7 +51,7 @@ Plug 'mileszs/ack.vim'
 
 Plug 'hashivim/vim-terraform'
 
-Plug 'fatih/vim-go', { 'tag': '*' }
+"Plug 'fatih/vim-go', { 'tag': '*' }
 
 Plug 'vim-scripts/EnhCommentify.vim'
 
@@ -63,8 +65,17 @@ Plug 'bling/vim-airline' "VIM status line
 
 Plug 'tpope/vim-fugitive' "Git integration
 
-"Plug 'neoclide/coc.nvim', {'branch': 'release'}
+Plug 'neoclide/jsonc.vim'
 
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
+
+Plug 'prettier/vim-prettier', {
+  \ 'do': 'npm install --frozen-lockfile --production',
+  \ 'for': ['javascript', 'typescript', 'css', 'less', 'scss', 'json', 'graphql', 'markdown', 'vue', 'svelte', 'yaml', 'html'] }
+
+Plug 'mattn/emmet-vim'
+
+Plug 'instant-markdown/vim-instant-markdown', {'for': 'markdown', 'do': 'yarn install'}
 
 call plug#end()
 

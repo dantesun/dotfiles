@@ -70,7 +70,7 @@ ZSH_CUSTOM=$HOME/.config/oh-my-zsh
 # Custom plugins may be added to $ZSH_CUSTOM/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git vi-mode proxy z asdf)
+plugins=(git vi-mode proxy z asdf kubectl)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -103,3 +103,7 @@ source $ZSH/oh-my-zsh.sh
 if has_cmd starship; then
   eval "$(starship init zsh)"
 fi
+
+
+# Load Angular CLI autocompletion.
+# source <(ng completion script)
