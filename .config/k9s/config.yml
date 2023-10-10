@@ -24,14 +24,10 @@ k9s:
         active: all
         lockFavorites: false
         favorites:
-        - istio-system
         - higress-system
-        - local-path-storage
-        - kube-system
-        - all
         - default
       view:
-        active: deployments
+        active: extensions.huaweicloud.io/v1alpha1/wasmplugins
       featureGates:
         nodeShell: false
       shellPod:

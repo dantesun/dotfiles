@@ -75,7 +75,9 @@ Plug 'prettier/vim-prettier', {
 
 Plug 'mattn/emmet-vim'
 
-Plug 'instant-markdown/vim-instant-markdown', {'for': 'markdown', 'do': 'yarn install'}
+"Plug 'instant-markdown/vim-instant-markdown', {'for': 'markdown', 'do': 'yarn install'}
+
+Plug 'rottencandy/vimkubectl'
 
 call plug#end()
 

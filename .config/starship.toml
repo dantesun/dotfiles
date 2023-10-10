@@ -1,4 +1,4 @@
-command_timeout = 600
+command_timeout = 1200
 [character]
 error_symbol = "[λ](bold #ff5555)"
 success_symbol = "[λ](bold #f8f8f2)"
