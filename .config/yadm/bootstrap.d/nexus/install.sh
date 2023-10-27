@@ -1,4 +1,17 @@
 #!/bin/bash
+echo "Installing nexus-oss as systemd service..."
+while true; do
+read -p "Do you want to proceed? (y/n) " yn
+case $yn in
+	[yY] ) 
+		break;;
+	[nN] )
+		exit;;
+	* ) echo invalid response;;
+esac
+done
+
+
 set -e
 cd "$(dirname "$0")"
 pkgname=nexus-oss
