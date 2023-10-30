@@ -1,4 +1,4 @@
-#!/bin/env bash
+#!/usr/bin/env bash
 
 if [ -d ~/.oh-my-zsh ]; then
   echo "oh-my-zsh folder found, skip installing"
