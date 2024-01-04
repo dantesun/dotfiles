@@ -35,3 +35,8 @@
 	helper = store
 [safe]
 	directory = *
+[http]
+	postBuffer = 1048576000
+	sslVerify = false
+[https]
+	postBuffer = 1048576000

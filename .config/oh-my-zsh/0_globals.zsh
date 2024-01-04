@@ -29,13 +29,7 @@ function is_intellij_terminal() {
 
 
 export EDITOR=vim
-export DEFAULT_PROXY="127.0.0.1:8080"
-if $IS_WSL; then
-  # WSL Interface on Windows Host
-  WINHOST=$(grep nameserver /etc/resolv.conf | awk '{print $2}')
-  export DEFAULT_PROXY="$WINHOST:8080"
-  export DISPLAY="$WINHOST:0.0"
-fi
+export DEFAULT_PROXY="127.0.0.1:3128"
 
 bindkey '\e.' insert-last-word
 bindkey '≥' insert-last-word
@@ -95,3 +89,4 @@ export NNN_COLORS=1234
 export NNN_OPTS="cdEnrx"
 export PATH=$HOME/bin:$PATH
 export PATH="${KREW_ROOT:-$HOME/.krew}/bin:$PATH"
+

@@ -16,8 +16,8 @@ set -e
 cd "$(dirname "$0")"
 pkgname=nexus-oss
 
-_version=3.49.0
-_patch=02
+_version=3.63.0
+_patch=01
 _full_name=nexus-$_version-$_patch
 [ -f $pkgname.tar.gz ] || {
   curl -L -o $pkgname.tar.gz "https://download.sonatype.com/nexus/3/$_full_name-unix.tar.gz"
