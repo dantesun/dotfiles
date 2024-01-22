@@ -82,6 +82,10 @@ if is_cygwin; then
 
 fi
 
+if has_cmd exa; then
+  alias ls='exa --icons -F -H --group-directories-first'
+fi
+
 ### nnn settings
 export NNN_PLUG='f:finder;o:fzopen;p:mocq;d:diffs;t:nmount;v:imgview'
 export NNN_FCOLORS=c1e2272e006033f7c6d6abc4
