@@ -527,7 +527,7 @@ function pst { Get-Clipboard }
 # Enhanced PowerShell Experience
 # Enhanced PSReadLine Configuration
 $PSReadLineOptions = @{
-    EditMode = 'Windows'
+    EditMode = 'vi'
     HistoryNoDuplicates = $true
     HistorySearchCursorMovesToEnd = $true
     Colors = @{
